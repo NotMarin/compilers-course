@@ -74,6 +74,7 @@ tokens = (
     
     'ID',
     'NUMBER',
+    'FLOAT',
     'STRING_LITERAL',
     'CHARACTER_LITERAL',
     'BOOLEAN_LITERAL'
@@ -244,7 +245,7 @@ def t_WHILE(t):
     return t
   
 def t_INTEGER(t):
-    r'integer'
+    r'\binteger\b'
     return t
   
 def t_READLN(t):
@@ -258,15 +259,21 @@ def t_READ(t):
 def t_XOR(t):
     r'\bxor\b'
     return t
+
+def t_FLOAT(t):
+    r'\d+\.\d*([eE][-+]?\d+)?|\.\d+([eE][-+]?\d+)?|\d+[eE][-+]?\d+'
+    t.value = float(t.value)
+    return t
+
   
 def t_NUMBER(t):
-    r'\d+'
+    r'\b\d+\b'
     t.value = int(t.value)
     return t
 
 def t_STRING_LITERAL(t):
     r'\"([^\\\n]|(\\.))*?\"|\'([^\\\n]|(\\.))*?\''
-    t.value = t.value[1:-1] 
+    t.value = t.value[1:-1]
     return t
   
 def t_CHARACTER_LITERAL(t):
@@ -275,7 +282,7 @@ def t_CHARACTER_LITERAL(t):
     return t
   
 def t_BOOLEAN_LITERAL(t):
-    r'true|false'
+    r'\btrue\b|\bfalse\b'
     return t
 
 def t_OUTPUT(t):
@@ -303,8 +310,8 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
     
 # Definir comentarios
-def t_comment(t):
-    r'\{[^}]*\}'
+def t_COMMENT(t):
+    r'\{[^}]*\}|\(\*[^*]*\*\)'
     pass
   
 def t_comment_multiline(t):
