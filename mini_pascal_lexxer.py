@@ -320,7 +320,7 @@ def t_newline(t):
     
 # Definir comentarios
 def t_COMMENT(t):
-    r'\{[^}]*\}|\(\*[^*]*\*\)'
+    r'\{[^}]*\}|\(\*[^*]*\*\)|//.*'
     pass
   
 def t_comment_multiline(t):
