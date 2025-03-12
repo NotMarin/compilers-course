@@ -299,6 +299,8 @@ def t_IN(t):
   
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
+    if t.value.upper() in tokens:
+        t.type = t.value.upper()
     return t
 
 # Ignorar espacios en blanco
