@@ -1,5 +1,12 @@
 import ply.lex as lex
 import sys
+import re
+
+# Correccion de errores
+
+# Santiago Marin Henao
+# Cristian David Lopez Hurtado
+# Rosendo Maximiliano Rodriguez Alvarado
 
 # Definir los tokens que se usarán
 tokens = (
@@ -321,8 +328,16 @@ def t_comment_multiline(t):
     pass
   
 def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
-    t.lexer.skip(1) 
+    if t.value[0].isdigit():
+        match = re.match(r'\d[a-zA-Z0-9_]*', t.value)
+        if match:
+            print(f"Error lexico: Identificador no valido '{match.group()}' en la linea {t.lineno}")
+        else:
+            print(f"Error lexico: Caracter ilegal '{t.value[0]}' en la linea {t.lineno}")
+        sys.exit(1)
+    else:
+        print(f"Error lexico: Caracter ilegal '{t.value[0]}' en la linea {t.lineno}")
+        t.lexer.skip(1)
     
 # Construir el lexer
 def test(data, lexer):
