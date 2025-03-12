@@ -309,7 +309,7 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
     
-# Definir comentarios
+# Definir comentarios de una línea y multilinea
 def t_COMMENT(t):
     r'\{[^}]*\}|\(\*[^*]*\*\)'
     pass
