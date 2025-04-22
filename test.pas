@@ -1,6 +1,6 @@
 program project1;
 const
-  y = "*";
+  y = 'X';
 
 var
   i, x : byte;
