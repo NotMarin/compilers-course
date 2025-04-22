@@ -101,7 +101,20 @@ def p_statement(p):
 
 def p_simple_statement(p):
     '''simple_statement : assignment_statement
+                        | for_statement
                         | empty'''
+    pass
+
+#for
+
+
+def p_for_statement(p):
+    '''for_statement : FOR ID ASSIGNMENT  expression direction expression DO statement'''
+    pass
+
+def p_direction(p):
+    '''direction : TO
+                 | DOWNTO'''
     pass
 
 def p_assignment_statement(p):
