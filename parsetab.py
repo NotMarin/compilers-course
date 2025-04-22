@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftORleftANDnonassocEQUALleftPLUSMINUSleftTIMESDIVIDEleftLPARENRPARENABSOLUTE AND ARRAY ASSIGNMENT BEGIN BOOLEAN_LITERAL CHARACTER_LITERAL COLON COMMA CONST DESTRUCTOR DISTINT DIV DIVIDE DO DOT DOUBLEQUOTE DOWNTO END EQUAL FLOAT FOR FUNCTION GREATER GREATEREQUAL ID IF IN INPUT INTEGER INTERFACE LABEL LBLOCK LBRACKET LESS LESSEQUAL LPAREN MINUS NIL NUMBER OBJECT OR OUTPUT PLUS PRIVATE PROCEDURE PROGRAM QUOTE RBLOCK RBRACKET READ READLN REPEAT RPAREN SEMICOLON SHL STRING STRING_LITERAL THEN TIMES TO UNIT UNTIL USES VAR VIRTUAL WHILE WRITE WRITELN XORprogram : PROGRAM ID SEMICOLON uses_clause_opt block DOTuses_clause_opt : uses_clause\n| emptyunit_list : unit_list COMMA ID\n| IDuses_clause : USES unit_list SEMICOLONblock : declarations compound_statementdeclarations : declaration_list\n| emptydeclaration_list : declaration_list declaration\n| declarationdeclaration : var_declaration\n| const_declarationvar_declaration : VAR var_declaration_listvar_declaration_list : var_declaration_list var_decl\n| var_declvar_decl : id_list COLON ID SEMICOLONid_list : id_list COMMA ID\n| IDconst_declaration : CONST const_listconst_list : const_list const_definition SEMICOLON\n| const_definition SEMICOLONconst_definition : ID EQUAL constantcompound_statement : BEGIN statement_list ENDstatement_list : statement\n| statement_list SEMICOLON statementstatement : simple_statement\n| compound_statementsimple_statement : assignment_statement\n| emptyassignment_statement : ID EQUAL expressionexpression : expression PLUS expression\n| expression MINUS expression\n| expression TIMES expression\n| expression DIVIDE expression\n| LPAREN expression RPAREN\n| ID\n| NUMBERconstant : NUMBER\n| STRING_LITERAL\n| CHARACTER_LITERAL\n| BOOLEAN_LITERALempty :'
+_lr_signature = 'leftORleftANDnonassocEQUALleftPLUSMINUSleftTIMESDIVIDEleftLPARENRPARENABSOLUTE AND ARRAY ASSIGNMENT BEGIN BOOLEAN_LITERAL CHARACTER_LITERAL COLON COMMA CONST DESTRUCTOR DISTINT DIV DIVIDE DO DOT DOUBLEQUOTE DOWNTO END EQUAL FLOAT FOR FUNCTION GREATER GREATEREQUAL ID IF IN INPUT INTEGER INTERFACE LABEL LBLOCK LBRACKET LESS LESSEQUAL LPAREN MINUS NIL NUMBER OBJECT OR OUTPUT PLUS PRIVATE PROCEDURE PROGRAM QUOTE RBLOCK RBRACKET READ READLN REPEAT RPAREN SEMICOLON SHL STRING STRING_LITERAL THEN TIMES TO UNIT UNTIL USES VAR VIRTUAL WHILE WRITE WRITELN XORprogram : PROGRAM ID SEMICOLON uses_clause_opt block DOTuses_clause_opt : uses_clause\n                       | emptyunit_list : unit_list COMMA ID\n                 | IDuses_clause : USES unit_list SEMICOLONblock : declarations compound_statementdeclarations : declaration_list\n                    | emptydeclaration_list : declaration_list declaration\n                        | declarationdeclaration : var_declaration\n                   | const_declaration\n                   | procedure_declarationvar_declaration : VAR var_declaration_listvar_declaration_list : var_declaration_list var_decl\n                | var_declvar_decl : id_list COLON ID SEMICOLONid_list : id_list COMMA ID\n               | IDconst_declaration : CONST const_listconst_list : const_list const_definition SEMICOLON\n                  | const_definition SEMICOLONconst_definition : ID EQUAL constantcompound_statement : BEGIN statement_list ENDstatement_list : statement\n                      | statement_list SEMICOLON statementstatement : simple_statement\n                 | compound_statementsimple_statement : assignment_statement\n                        | emptyassignment_statement : ID EQUAL expressionexpression : expression PLUS expression\n                  | expression MINUS expression\n                  | expression TIMES expression\n                  | expression DIVIDE expression\n                  | LPAREN expression RPAREN\n                  | ID\n                  | NUMBERconstant : NUMBER\n                | STRING_LITERAL\n                | CHARACTER_LITERAL\n                | BOOLEAN_LITERALprocedure_declaration : PROCEDURE ID LPAREN parameters RPAREN SEMICOLON declarations compound_statement SEMICOLONparameters : parameter_list\n                  | emptyparameter_list : parameter_list SEMICOLON parameter\n                      | parameterparameter : id_list COLON IDempty :'
     
-_lr_action_items = {'PROGRAM':([0,],[2,]),'$end':([1,20,],[0,-1,]),'ID':([2,8,16,17,22,24,25,28,32,40,41,42,44,48,49,52,61,63,64,65,66,67,],[3,19,27,30,39,27,-16,30,46,-15,50,51,-22,39,59,-21,59,-17,59,59,59,59,]),'SEMICOLON':([3,18,19,22,29,33,34,35,36,37,38,43,46,47,48,50,53,54,55,56,57,58,59,60,62,69,70,71,72,73,],[4,31,-5,-43,44,48,-25,-27,-28,-29,-30,52,-4,-24,-43,63,-23,-39,-40,-41,-42,-26,-37,-31,-38,-32,-33,-34,-35,-36,]),'USES':([4,],[8,]),'VAR':([4,5,6,7,11,13,14,15,23,24,25,28,31,40,44,52,63,],[-43,16,-2,-3,16,-11,-12,-13,-10,-14,-16,-20,-6,-15,-22,-21,-17,]),'CONST':([4,5,6,7,11,13,14,15,23,24,25,28,31,40,44,52,63,],[-43,17,-2,-3,17,-11,-12,-13,-10,-14,-16,-20,-6,-15,-22,-21,-17,]),'BEGIN':([4,5,6,7,10,11,12,13,14,15,22,23,24,25,28,31,40,44,48,52,63,],[-43,-43,-2,-3,22,-8,-9,-11,-12,-13,22,-10,-14,-16,-20,-6,-15,-22,22,-21,-17,]),'DOT':([9,21,47,],[20,-7,-24,]),'COMMA':([18,19,26,27,46,51,],[32,-5,42,-19,-4,-18,]),'END':([22,33,34,35,36,37,38,47,48,58,59,60,62,69,70,71,72,73,],[-43,47,-25,-27,-28,-29,-30,-24,-43,-26,-37,-31,-38,-32,-33,-34,-35,-36,]),'COLON':([26,27,51,],[41,-19,-18,]),'EQUAL':([30,39,],[45,49,]),'NUMBER':([45,49,61,64,65,66,67,],[54,62,62,62,62,62,62,]),'STRING_LITERAL':([45,],[55,]),'CHARACTER_LITERAL':([45,],[56,]),'BOOLEAN_LITERAL':([45,],[57,]),'LPAREN':([49,61,64,65,66,67,],[61,61,61,61,61,61,]),'PLUS':([59,60,62,68,69,70,71,72,73,],[-37,64,-38,64,-32,-33,-34,-35,-36,]),'MINUS':([59,60,62,68,69,70,71,72,73,],[-37,65,-38,65,-32,-33,-34,-35,-36,]),'TIMES':([59,60,62,68,69,70,71,72,73,],[-37,66,-38,66,66,66,-34,-35,-36,]),'DIVIDE':([59,60,62,68,69,70,71,72,73,],[-37,67,-38,67,67,67,-34,-35,-36,]),'RPAREN':([59,62,68,69,70,71,72,73,],[-37,-38,73,-32,-33,-34,-35,-36,]),}
+_lr_action_items = {'PROGRAM':([0,],[2,]),'$end':([1,22,],[0,-1,]),'ID':([2,8,17,18,19,24,26,27,30,35,43,44,45,47,49,52,53,56,70,72,74,75,76,77,78,79,],[3,21,29,32,33,42,29,-17,32,50,-16,54,55,-23,29,42,68,-22,68,-18,29,83,68,68,68,68,]),'SEMICOLON':([3,20,21,24,31,36,37,38,39,40,41,46,50,51,52,54,57,58,59,60,61,63,65,67,68,69,71,73,82,83,84,85,86,87,88,90,],[4,34,-5,-50,47,52,-26,-28,-29,-30,-31,56,-4,-25,-50,72,-24,-40,-41,-42,-43,74,-48,-27,-38,-32,-39,81,-47,-49,-33,-34,-35,-36,-37,91,]),'USES':([4,],[8,]),'VAR':([4,5,6,7,11,13,14,15,16,25,26,27,30,34,43,47,56,72,81,91,],[-50,17,-2,-3,17,-11,-12,-13,-14,-10,-15,-17,-21,-6,-16,-23,-22,-18,17,-44,]),'CONST':([4,5,6,7,11,13,14,15,16,25,26,27,30,34,43,47,56,72,81,91,],[-50,18,-2,-3,18,-11,-12,-13,-14,-10,-15,-17,-21,-6,-16,-23,-22,-18,18,-44,]),'PROCEDURE':([4,5,6,7,11,13,14,15,16,25,26,27,30,34,43,47,56,72,81,91,],[-50,19,-2,-3,19,-11,-12,-13,-14,-10,-15,-17,-21,-6,-16,-23,-22,-18,19,-44,]),'BEGIN':([4,5,6,7,10,11,12,13,14,15,16,24,25,26,27,30,34,43,47,52,56,72,81,89,91,],[-50,-50,-2,-3,24,-8,-9,-11,-12,-13,-14,24,-10,-15,-17,-21,-6,-16,-23,24,-22,-18,-50,24,-44,]),'DOT':([9,23,51,],[22,-7,-25,]),'COMMA':([20,21,28,29,50,55,66,],[35,-5,45,-20,-4,-19,45,]),'END':([24,36,37,38,39,40,41,51,52,67,68,69,71,84,85,86,87,88,],[-50,51,-26,-28,-29,-30,-31,-25,-50,-27,-38,-32,-39,-33,-34,-35,-36,-37,]),'COLON':([28,29,55,66,],[44,-20,-19,75,]),'EQUAL':([32,42,],[48,53,]),'LPAREN':([33,53,70,76,77,78,79,],[49,70,70,70,70,70,70,]),'NUMBER':([48,53,70,76,77,78,79,],[58,71,71,71,71,71,71,]),'STRING_LITERAL':([48,],[59,]),'CHARACTER_LITERAL':([48,],[60,]),'BOOLEAN_LITERAL':([48,],[61,]),'RPAREN':([49,62,63,64,65,68,71,80,82,83,84,85,86,87,88,],[-50,73,-45,-46,-48,-38,-39,88,-47,-49,-33,-34,-35,-36,-37,]),'PLUS':([68,69,71,80,84,85,86,87,88,],[-38,76,-39,76,-33,-34,-35,-36,-37,]),'MINUS':([68,69,71,80,84,85,86,87,88,],[-38,77,-39,77,-33,-34,-35,-36,-37,]),'TIMES':([68,69,71,80,84,85,86,87,88,],[-38,78,-39,78,78,78,-35,-36,-37,]),'DIVIDE':([68,69,71,80,84,85,86,87,88,],[-38,79,-39,79,79,79,-35,-36,-37,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[1,]),'uses_clause_opt':([4,],[5,]),'uses_clause':([4,],[6,]),'empty':([4,5,22,48,],[7,12,38,38,]),'block':([5,],[9,]),'declarations':([5,],[10,]),'declaration_list':([5,],[11,]),'declaration':([5,11,],[13,23,]),'var_declaration':([5,11,],[14,14,]),'const_declaration':([5,11,],[15,15,]),'unit_list':([8,],[18,]),'compound_statement':([10,22,48,],[21,36,36,]),'var_declaration_list':([16,],[24,]),'var_decl':([16,24,],[25,40,]),'id_list':([16,24,],[26,26,]),'const_list':([17,],[28,]),'const_definition':([17,28,],[29,43,]),'statement_list':([22,],[33,]),'statement':([22,48,],[34,58,]),'simple_statement':([22,48,],[35,35,]),'assignment_statement':([22,48,],[37,37,]),'constant':([45,],[53,]),'expression':([49,61,64,65,66,67,],[60,68,69,70,71,72,]),}
+_lr_goto_items = {'program':([0,],[1,]),'uses_clause_opt':([4,],[5,]),'uses_clause':([4,],[6,]),'empty':([4,5,24,49,52,81,],[7,12,41,64,41,12,]),'block':([5,],[9,]),'declarations':([5,81,],[10,89,]),'declaration_list':([5,81,],[11,11,]),'declaration':([5,11,81,],[13,25,13,]),'var_declaration':([5,11,81,],[14,14,14,]),'const_declaration':([5,11,81,],[15,15,15,]),'procedure_declaration':([5,11,81,],[16,16,16,]),'unit_list':([8,],[20,]),'compound_statement':([10,24,52,89,],[23,39,39,90,]),'var_declaration_list':([17,],[26,]),'var_decl':([17,26,],[27,43,]),'id_list':([17,26,49,74,],[28,28,66,66,]),'const_list':([18,],[30,]),'const_definition':([18,30,],[31,46,]),'statement_list':([24,],[36,]),'statement':([24,52,],[37,67,]),'simple_statement':([24,52,],[38,38,]),'assignment_statement':([24,52,],[40,40,]),'constant':([48,],[57,]),'parameters':([49,],[62,]),'parameter_list':([49,],[63,]),'parameter':([49,74,],[65,82,]),'expression':([53,70,76,77,78,79,],[69,80,84,85,86,87,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -40,34 +40,41 @@ _lr_productions = [
   ('declaration_list -> declaration','declaration_list',1,'p_declaration_list','mini_pascal_parser.py',48),
   ('declaration -> var_declaration','declaration',1,'p_declaration','mini_pascal_parser.py',52),
   ('declaration -> const_declaration','declaration',1,'p_declaration','mini_pascal_parser.py',53),
-  ('var_declaration -> VAR var_declaration_list','var_declaration',2,'p_var_declaration','mini_pascal_parser.py',57),
-  ('var_declaration_list -> var_declaration_list var_decl','var_declaration_list',2,'p_var_declaration_list','mini_pascal_parser.py',61),
-  ('var_declaration_list -> var_decl','var_declaration_list',1,'p_var_declaration_list','mini_pascal_parser.py',62),
-  ('var_decl -> id_list COLON ID SEMICOLON','var_decl',4,'p_var_decl','mini_pascal_parser.py',66),
-  ('id_list -> id_list COMMA ID','id_list',3,'p_id_list','mini_pascal_parser.py',70),
-  ('id_list -> ID','id_list',1,'p_id_list','mini_pascal_parser.py',71),
-  ('const_declaration -> CONST const_list','const_declaration',2,'p_const_declaration','mini_pascal_parser.py',75),
-  ('const_list -> const_list const_definition SEMICOLON','const_list',3,'p_const_list','mini_pascal_parser.py',79),
-  ('const_list -> const_definition SEMICOLON','const_list',2,'p_const_list','mini_pascal_parser.py',80),
-  ('const_definition -> ID EQUAL constant','const_definition',3,'p_const_definition','mini_pascal_parser.py',84),
-  ('compound_statement -> BEGIN statement_list END','compound_statement',3,'p_compound_statement','mini_pascal_parser.py',88),
-  ('statement_list -> statement','statement_list',1,'p_statement_list','mini_pascal_parser.py',92),
-  ('statement_list -> statement_list SEMICOLON statement','statement_list',3,'p_statement_list','mini_pascal_parser.py',93),
-  ('statement -> simple_statement','statement',1,'p_statement','mini_pascal_parser.py',97),
-  ('statement -> compound_statement','statement',1,'p_statement','mini_pascal_parser.py',98),
-  ('simple_statement -> assignment_statement','simple_statement',1,'p_simple_statement','mini_pascal_parser.py',102),
-  ('simple_statement -> empty','simple_statement',1,'p_simple_statement','mini_pascal_parser.py',103),
-  ('assignment_statement -> ID EQUAL expression','assignment_statement',3,'p_assignment_statement','mini_pascal_parser.py',107),
-  ('expression -> expression PLUS expression','expression',3,'p_expression','mini_pascal_parser.py',111),
-  ('expression -> expression MINUS expression','expression',3,'p_expression','mini_pascal_parser.py',112),
-  ('expression -> expression TIMES expression','expression',3,'p_expression','mini_pascal_parser.py',113),
-  ('expression -> expression DIVIDE expression','expression',3,'p_expression','mini_pascal_parser.py',114),
-  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression','mini_pascal_parser.py',115),
-  ('expression -> ID','expression',1,'p_expression','mini_pascal_parser.py',116),
-  ('expression -> NUMBER','expression',1,'p_expression','mini_pascal_parser.py',117),
-  ('constant -> NUMBER','constant',1,'p_constant','mini_pascal_parser.py',121),
-  ('constant -> STRING_LITERAL','constant',1,'p_constant','mini_pascal_parser.py',122),
-  ('constant -> CHARACTER_LITERAL','constant',1,'p_constant','mini_pascal_parser.py',123),
-  ('constant -> BOOLEAN_LITERAL','constant',1,'p_constant','mini_pascal_parser.py',124),
-  ('empty -> <empty>','empty',0,'p_empty','mini_pascal_parser.py',128),
+  ('declaration -> procedure_declaration','declaration',1,'p_declaration','mini_pascal_parser.py',54),
+  ('var_declaration -> VAR var_declaration_list','var_declaration',2,'p_var_declaration','mini_pascal_parser.py',58),
+  ('var_declaration_list -> var_declaration_list var_decl','var_declaration_list',2,'p_var_declaration_list','mini_pascal_parser.py',62),
+  ('var_declaration_list -> var_decl','var_declaration_list',1,'p_var_declaration_list','mini_pascal_parser.py',63),
+  ('var_decl -> id_list COLON ID SEMICOLON','var_decl',4,'p_var_decl','mini_pascal_parser.py',67),
+  ('id_list -> id_list COMMA ID','id_list',3,'p_id_list','mini_pascal_parser.py',71),
+  ('id_list -> ID','id_list',1,'p_id_list','mini_pascal_parser.py',72),
+  ('const_declaration -> CONST const_list','const_declaration',2,'p_const_declaration','mini_pascal_parser.py',76),
+  ('const_list -> const_list const_definition SEMICOLON','const_list',3,'p_const_list','mini_pascal_parser.py',80),
+  ('const_list -> const_definition SEMICOLON','const_list',2,'p_const_list','mini_pascal_parser.py',81),
+  ('const_definition -> ID EQUAL constant','const_definition',3,'p_const_definition','mini_pascal_parser.py',85),
+  ('compound_statement -> BEGIN statement_list END','compound_statement',3,'p_compound_statement','mini_pascal_parser.py',89),
+  ('statement_list -> statement','statement_list',1,'p_statement_list','mini_pascal_parser.py',93),
+  ('statement_list -> statement_list SEMICOLON statement','statement_list',3,'p_statement_list','mini_pascal_parser.py',94),
+  ('statement -> simple_statement','statement',1,'p_statement','mini_pascal_parser.py',98),
+  ('statement -> compound_statement','statement',1,'p_statement','mini_pascal_parser.py',99),
+  ('simple_statement -> assignment_statement','simple_statement',1,'p_simple_statement','mini_pascal_parser.py',103),
+  ('simple_statement -> empty','simple_statement',1,'p_simple_statement','mini_pascal_parser.py',104),
+  ('assignment_statement -> ID EQUAL expression','assignment_statement',3,'p_assignment_statement','mini_pascal_parser.py',108),
+  ('expression -> expression PLUS expression','expression',3,'p_expression','mini_pascal_parser.py',112),
+  ('expression -> expression MINUS expression','expression',3,'p_expression','mini_pascal_parser.py',113),
+  ('expression -> expression TIMES expression','expression',3,'p_expression','mini_pascal_parser.py',114),
+  ('expression -> expression DIVIDE expression','expression',3,'p_expression','mini_pascal_parser.py',115),
+  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression','mini_pascal_parser.py',116),
+  ('expression -> ID','expression',1,'p_expression','mini_pascal_parser.py',117),
+  ('expression -> NUMBER','expression',1,'p_expression','mini_pascal_parser.py',118),
+  ('constant -> NUMBER','constant',1,'p_constant','mini_pascal_parser.py',122),
+  ('constant -> STRING_LITERAL','constant',1,'p_constant','mini_pascal_parser.py',123),
+  ('constant -> CHARACTER_LITERAL','constant',1,'p_constant','mini_pascal_parser.py',124),
+  ('constant -> BOOLEAN_LITERAL','constant',1,'p_constant','mini_pascal_parser.py',125),
+  ('procedure_declaration -> PROCEDURE ID LPAREN parameters RPAREN SEMICOLON declarations compound_statement SEMICOLON','procedure_declaration',9,'p_procedure_declaration','mini_pascal_parser.py',130),
+  ('parameters -> parameter_list','parameters',1,'p_parameters','mini_pascal_parser.py',136),
+  ('parameters -> empty','parameters',1,'p_parameters','mini_pascal_parser.py',137),
+  ('parameter_list -> parameter_list SEMICOLON parameter','parameter_list',3,'p_parameter_list','mini_pascal_parser.py',141),
+  ('parameter_list -> parameter','parameter_list',1,'p_parameter_list','mini_pascal_parser.py',142),
+  ('parameter -> id_list COLON ID','parameter',3,'p_parameter','mini_pascal_parser.py',146),
+  ('empty -> <empty>','empty',0,'p_empty','mini_pascal_parser.py',150),
 ]

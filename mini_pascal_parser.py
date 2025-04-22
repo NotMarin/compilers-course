@@ -50,7 +50,8 @@ def p_declaration_list(p):
 
 def p_declaration(p):
     '''declaration : var_declaration
-                   | const_declaration'''
+                   | const_declaration
+                   | procedure_declaration'''
     pass
 
 def p_var_declaration(p):
@@ -122,6 +123,27 @@ def p_constant(p):
                 | STRING_LITERAL
                 | CHARACTER_LITERAL
                 | BOOLEAN_LITERAL'''
+    pass
+
+#estructra procedimiento
+def p_procedure_declaration(p):
+    '''procedure_declaration : PROCEDURE ID LPAREN parameters RPAREN SEMICOLON declarations compound_statement SEMICOLON'''
+    pass
+
+#reglas
+
+def p_parameters(p):
+    '''parameters : parameter_list
+                  | empty'''
+    pass
+
+def p_parameter_list(p):
+    '''parameter_list : parameter_list SEMICOLON parameter
+                      | parameter'''
+    pass
+
+def p_parameter(p):
+    '''parameter : id_list COLON ID'''
     pass
 
 def p_empty(p):
