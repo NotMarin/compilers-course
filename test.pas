@@ -1,22 +1,19 @@
-program TestParser;
+program OtroTest;
 
 var
-  x, y: integer;
-  z: boolean;
+  a: integer;
+  b: integer;  
 
 begin
-  x := 5;
-  y := 10;
-  z := true;
+  a := 0;
+  b := 1;
 
-  if x < y then
-    x := x + 1
-  else
-    x := x - 1;
+  repeat
+    a := a + b;
+    b := b + 1;
+  until a > 10;
 
-  while x < 20 do
-  begin
-    x := x + 2;
-  end;
+  if (a mod 2 = 0) then
+    a := a div 2;
 
 end.

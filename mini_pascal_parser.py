@@ -427,14 +427,12 @@ parser = yacc.yacc(debug=True)
 
 if __name__ == '__main__':
 	if (len(sys.argv) > 1):
-        
 		fin = sys.argv[1]
 	else:
 		fin = 'test.pas'
-
 	f = open(fin, 'r')
-	# data = f.read()
-	# print (data)
-	# parser.parse(data, tracking=True)
-	print("El parser reconocio correctamente todo")
-	#input()
+	data = f.read()
+if parser.parse(data, tracking=True) == None:
+    print("No se encontraron errores de sintaxis.")
+else:
+    print("Se encontraron errores de sintaxis.")
