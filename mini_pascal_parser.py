@@ -5,6 +5,10 @@ import sys
 
 VERBOSE = 1 # 1 para imprimir errores, 0 para no imprimir errores
 
+# Santiago Marin Henao
+# Cristian David Lopez Hurtado
+# Rosendo Maximiliano Rodriguez Alvarado
+
 # Reglas de precedencia
 precedence = (
     ('right', 'ASSIGN'),

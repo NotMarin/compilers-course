@@ -1,23 +1,22 @@
-program project1;
-const
-  y = 'X';
+program TestParser;
 
 var
-  i, x : byte;
- 
-  procedure writeln_n_times(x : char; n : byte);
-  var
-    i : byte;
-  begin
-    for i := 1 to n do
-      write(x);
-    writeln('hola');
-  end;
+  x, y: integer;
+  z: boolean;
 
 begin
-  write('Ievadiet veselu skaitli: ');
-  readln(x);
+  x := 5;
+  y := 10;
+  z := true;
 
-  for i := x downto 1 do
-    writeln_n_times(y, i);
+  if x < y then
+    x := x + 1
+  else
+    x := x - 1;
+
+  while x < 20 do
+  begin
+    x := x + 2;
+  end;
+
 end.
