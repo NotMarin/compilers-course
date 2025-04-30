@@ -442,8 +442,8 @@ if __name__ == '__main__':
 		fin = sys.argv[1]
 	else:
 		fin = 'test.pas'
-	f = open(fin, 'r')
-	data = f.read()
+with open(fin, 'r', encoding='utf-8') as f:
+    data = f.read()
 if parser.parse(data, tracking=True) == None:
     print("No se encontraron errores de sintaxis.")
 else:
