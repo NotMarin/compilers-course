@@ -75,7 +75,7 @@ tokens = (
     'WHILE', 'XOR', 'INTEGER', 'REAL', 'BOOLEAN', 'OF', 'CLASS', 'FUNCTION', 'PROCEDURE',
 
     # Operators
-    'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'DIVIDE_INT', 'MODULO', 'EQUAL', 'NEQUAL', 'LT', 'GT', 'LE', 'GE', 'ASSIGN',
+    'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'DIVIDE_INT', 'MODULO', 'EQUAL', 'NEQUAL', 'LT', 'GT', 'LE', 'GE', 'ASSIGN','EXPONENT',
 
     # Delimiters
     'LPAREN', 'RPAREN', 'LBRACKET', 'RBRACKET', 'SEMICOLON', 'COMMA', 'COLON', 'DOT', 'DOTDOT',
@@ -98,6 +98,7 @@ t_GT = r'>'
 t_LE = r'<='
 t_GE = r'>='
 t_ASSIGN = r':='
+t_EXPONENT = r'\^'
 
 # Delimiters
 t_LPAREN = r'\('

@@ -20,6 +20,7 @@ precedence = (
     ('left', 'TIMES', 'DIVIDE', 'DIVIDE_INT', 'MODULO'),
     ('left', 'LPAREN', 'RPAREN'),
     ('right', 'NOT'),
+    ('right', 'EXPONENT'), 
 )
 
 # Reglas para el programa principal
@@ -138,11 +139,21 @@ def p_type(p):
     '''type : simple_type
             | array_type
             | record_type
-            | class_type'''
+            | class_type
+            | enumerated_type'''
     pass
 
 def p_class_type(p):
     'class_type : CLASS class_body END'
+    pass
+
+def p_enumerated_type(p):
+    'enumerated_type : LPAREN identifier_list RPAREN'
+    pass
+
+def p_identifier_list(p):
+    '''identifier_list : identifier_list COMMA ID
+                       | ID'''
     pass
 
 def p_class_body(p):
@@ -368,6 +379,7 @@ def p_expression(p):
                   | expression OR expression
                   | expression XOR expression
                   | NOT expression %prec NOT
+                  | expression EXPONENT expression 
                   | LPAREN expression RPAREN
                   | function_call
                   | variable
