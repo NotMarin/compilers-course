@@ -435,4 +435,4 @@ if __name__ == '__main__':
 if parser.parse(data, tracking=True) == None:
     print("No se encontraron errores de sintaxis.")
 else:
-    print("Se encontraron errores de sintaxis.")
+    print("Se encontraron errores de sintaxiss.")
