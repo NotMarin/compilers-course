@@ -247,9 +247,10 @@ def p_compound_statement(p):
     pass
 
 def p_statement_list(p):
-    '''statement_list : statement
-                      | statement_list SEMICOLON statement'''
+    '''statement_list : statement SEMICOLON
+                      | statement_list statement SEMICOLON'''
     pass
+
 
 def p_statement(p):
     '''statement : simple_statement
