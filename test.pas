@@ -1,19 +1,23 @@
-program SemanticErrors;
+program Simple;
 
 var
-  x: integer;
-  y: real;
-  square: integer;
-
-function square(a: integer): integer;
-begin
-  square := a * a;
-end;
+  a, b, c: integer;
+  promedio: real;
 
 begin
-  x := 'hello';               { Error semántico: asignación de string a integer }
-  y := square(3.5);           { Error semántico: paso de real a una función que espera integer }
-  writeln(z);                { Error semántico: variable 'z' no declarada }
-  y := x / 0;                { Error semántico: división por cero (aunque algunos compiladores lo permiten hasta tiempo de ejecución) }
-  x := true;                 { Error semántico: asignación de boolean a integer }
+  a := 7;
+  b := 9;
+  c := 8;
+  promedio := (a + b + c) / 3;
+  
+  if promedio > 7.0 then
+    writeln('Aprobado')
+  else
+    writeln('Reprobado');
+
+  while promedio > 5.0 do
+  begin
+    promedio := promedio - 1.0;
+    writeln('Reduciendo promedio: ', promedio);
+  end;
 end.

@@ -552,7 +552,7 @@ if __name__ == '__main__':
 	data = f.read()
 ast = parser.parse(data, tracking=True)
 if ast is not None:
-    print("Árbol de sintaxis construido exitosamente.")
+    print("No se encontraron errores.")
 else:
     print("Se encontraron errores de sintaxis.")
 
