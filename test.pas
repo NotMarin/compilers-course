@@ -1,14 +1,14 @@
 program Simple;
 
 var
-  a, b, c: integer;
+  a, b, c, z: integer;
   promedio: real;
 
 begin
   a := 7;
   b := 9;
   c := 8;
-  promedio := (a + b + c) / 3;
+  promedio := (a + b + c) / 3 + z;
   
   if promedio > 7.0 then
     writeln('Aprobado')

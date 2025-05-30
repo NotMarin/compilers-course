@@ -556,3 +556,10 @@ if ast is not None:
 else:
     print("Se encontraron errores de sintaxis.")
 
+print("Símbolos en la tabla de símbolos:")
+for name, symbol in symbol_table.symbols.items():
+    # Try to get 'value', if not present, get 'var_type' or just print the symbol itself
+    value = getattr(symbol, 'value', None)
+    if value is None:
+        value = getattr(symbol, 'var_type', None)
+    print(f"{name}: {symbol}, valor: {value}")
