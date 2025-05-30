@@ -2,12 +2,58 @@ import ply.yacc as yacc
 from mini_pascal_lexxer import tokens
 import mini_pascal_lexxer
 import sys
+from symbol_table import SymbolTable
 
+symbol_table = SymbolTable()
 VERBOSE = 1 # 1 para imprimir errores, 0 para no imprimir errores
 
 # Santiago Marin Henao
 # Cristian David Lopez Hurtado
 # Rosendo Maximiliano Rodriguez Alvarado
+
+class Program:
+    def __init__(self, name, uses, block):
+        self.name = name
+        self.uses = uses
+        self.block = block
+
+class Block:
+    def __init__(self, declarations, compound_statement):
+        self.declarations = declarations
+        self.compound_statement = compound_statement
+
+class VarDecl:
+    def __init__(self, names, var_type):
+        self.names = names
+        self.var_type = var_type
+
+class Assignment:
+    def __init__(self, variable, expression):
+        self.variable = variable
+        self.expression = expression
+
+class BinaryOp:
+    def __init__(self, op, left, right):
+        self.op = op
+        self.left = left
+        self.right = right
+
+class Num:
+    def __init__(self, value):
+        self.value = value
+
+class Variable:
+    def __init__(self, name):
+        self.name = name
+
+class Compound:
+    def __init__(self, statements):
+        self.statements = statements
+        
+class UnaryOp:
+    def __init__(self, op, expr):
+        self.op = op
+        self.expr = expr
 
 # Reglas de precedencia
 precedence = (
@@ -25,7 +71,7 @@ precedence = (
 # Reglas para el programa principal
 def p_program(p):
     'program : PROGRAM ID SEMICOLON uses_clause_opt block DOT'
-    pass
+    p[0] = Program(p[2], p[4], p[5])
 
 def p_uses_clause_opt(p):
     '''uses_clause_opt : uses_clause
@@ -45,7 +91,7 @@ def p_uses_clause(p):
 # Reglas para el bloque
 def p_block(p):
     'block : declarations compound_statement'
-    pass
+    p[0] = Block(p[1], p[2])
 
 # Reglas para las declaraciones
 def p_declarations(p):
@@ -77,12 +123,18 @@ def p_var_declaration_list(p):
 
 def p_var_decl(p):
     'var_decl : id_list COLON type SEMICOLON'
-    pass
+    for var in p[1]:
+        symbol_table.define(var, p[3])
+    p[0] = VarDecl(p[1], p[3])
+
 
 def p_id_list(p):
     '''id_list : id_list COMMA ID
                | ID'''
-    pass
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = p[1] + [p[3]]
 
 def p_const_declaration(p):
     'const_declaration : CONST const_list'
@@ -233,12 +285,15 @@ def p_predefined_type(p):
 # Reglas para las sentencias
 def p_compound_statement(p):
     'compound_statement : BEGIN statement_list END'
-    pass
+    p[0] = Compound(p[2])
 
 def p_statement_list(p):
     '''statement_list : statement
                       | statement_list SEMICOLON statement'''
-    pass
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = p[1] + [p[3]]
 
 def p_statement(p):
     '''statement : simple_statement
@@ -253,13 +308,16 @@ def p_simple_statement(p):
 
 def p_assignment_statement(p):
     'assignment_statement : variable ASSIGN expression'
-    pass
+    p[0] = Assignment(p[1], p[3])
 
 def p_variable(p):
-    '''variable : ID
-                | variable DOT ID
-                | variable LBRACKET expression_list RBRACKET'''
-    pass
+    'variable : ID'
+    try:
+        symbol_table.lookup(p[1])
+    except Exception as e:
+        print(str(e))
+        raise
+    p[0] = Variable(p[1])
 
 def p_expression_list(p):
     '''expression_list : expression
@@ -366,16 +424,36 @@ def p_expression(p):
                   | expression GE expression
                   | expression AND expression
                   | expression OR expression
-                  | expression XOR expression
-                  | NOT expression %prec NOT
-                  | LPAREN expression RPAREN
-                  | function_call
-                  | variable
-                  | INTEGER_CONST
-                  | REAL_CONST
-                  | STRING_LITERAL'''
-    pass
+                  | expression XOR expression'''
+    p[0] = BinaryOp(p[2], p[1], p[3])
+    
+def p_expression_not(p):
+    'expression : NOT expression %prec NOT'
+    p[0] = UnaryOp('NOT', p[2])
 
+def p_expression_group(p):
+    'expression : LPAREN expression RPAREN'
+    p[0] = p[2]
+
+def p_expression_function_call(p):
+    'expression : function_call'
+    p[0] = p[1]
+
+def p_expression_variable(p):
+    'expression : variable'
+    p[0] = p[1]
+
+def p_expression_integer(p):
+    'expression : INTEGER_CONST'
+    p[0] = Num(p[1])
+
+def p_expression_real(p):
+    'expression : REAL_CONST'
+    p[0] = Num(p[1])
+
+def p_expression_string(p):
+    'expression : STRING_LITERAL'
+    p[0] = Num(p[1])  # O crea una clase StringLiteral si quieres manejarlo distinto
 
 def p_function_call(p):
     'function_call : ID LPAREN args_optional RPAREN'
@@ -432,7 +510,9 @@ if __name__ == '__main__':
 		fin = 'test.pas'
 	f = open(fin, 'r')
 	data = f.read()
-if parser.parse(data, tracking=True) == None:
-    print("No se encontraron errores de sintaxis.")
+ast = parser.parse(data, tracking=True)
+if ast is not None:
+    print("Árbol de sintaxis construido exitosamente.")
 else:
-    print("Se encontraron errores de sintaxiss.")
+    print("Se encontraron errores de sintaxis.")
+
